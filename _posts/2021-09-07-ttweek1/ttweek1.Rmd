@@ -1,0 +1,19 @@
+---
+title: "Tidy Tuesday Week 9/7"
+description: |
+  Tidy Tuesday for the first week
+author:
+  - name: Rita Liu
+date: 09-07-2021
+preview: temp.jpg
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Here is my work for Tiday Tuesday 9/7. 

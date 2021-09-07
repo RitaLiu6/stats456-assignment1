@@ -13,3 +13,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
+![](professional photo1.JPG){width=200}
+
+## About me: 
+
+## Education: 
