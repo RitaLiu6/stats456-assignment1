@@ -16,5 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ![](professional photo1.JPG){width=200}
 
 ## About me: 
+My name is Rita Liu. I'm from Beijing, China. My favorite activity during free time is to eat snacks while watching sitcoms. 
 
 ## Education: 
+I go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics. Here are some classes I'vev taken: Mathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure. 

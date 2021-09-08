@@ -5,15 +5,14 @@ description: |
 author:
   - name: Rita Liu
 date: 09-07-2021
-preview: temp.jpg
+preview: circuits.png
 output:
   distill::distill_article:
     self_contained: false
 ---
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+![](circuits.png)
 
-Here is my work for Tiday Tuesday 9/7. 
+> Above is my tidy tuesday picture for week 37. The reason why I try to show the locations of F-1 race circuits is that I realize people with different cultural backgrounds tend to understand car race differently. As we can see, from the map, most circuits are located in Europe and North America. In terms of the theme, I choose to use dark blue for the points to make them stand out from the background and centred the title to make the graph look better.
+

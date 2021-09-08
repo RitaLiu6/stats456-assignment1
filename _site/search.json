@@ -2,18 +2,18 @@
   "articles": [
     {
       "path": "blog.html",
-      "title": "blog",
+      "title": "Tidy Tuesday Posts",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-09-07T11:09:25-05:00"
+      "last_modified": "2021-09-08T10:17:05-05:00"
     },
     {
       "path": "index.html",
       "title": "Rita Liu",
       "description": "Welcome to the website. I hope you enjoy it!\n",
       "author": [],
-      "contents": "\n\nAbout me:\nEducation:\n\n\n\n",
-      "last_modified": "2021-09-07T11:09:26-05:00"
+      "contents": "\n\nAbout me:\nMy name is Rita Liu. I’m from Beijing, China. My favorite activity during free time is to eat snacks while watching sitcoms.\nEducation:\nI go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics. Here are some classes I’vev taken: Mathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure.\n\n\n\n",
+      "last_modified": "2021-09-08T10:17:08-05:00"
     }
   ],
   "collections": ["posts/posts.json"]

@@ -1,5 +1,5 @@
 ---
-title: "blog"
+title: "Tidy Tuesday Posts"
 listing: posts
 theme: "rita_theme.css"
 ---

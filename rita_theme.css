@@ -27,10 +27,10 @@ html {
   --aside-color:     rgba(0, 0, 0, 0.6);
   --fig-cap-color:   rgba(0, 0, 0, 0.6);
   /*-- Specify custom fonts ~~~ must be imported above   --*/
-  --heading-font:    sans-serif;
+  --heading-font:    Sans-serif;
   --mono-font:       monospace;
-  --body-font:       sans-serif;
-  --navbar-font:     sans-serif;  /* websites + blogs only */
+  --body-font:       Sans-serif;
+  --navbar-font:     Fantasy;  /* websites + blogs only */
 }
 
 /*-- ARTICLE METADATA --*/
@@ -60,9 +60,10 @@ d-appendix {
 
 .distill-site-header {
   --title-size:       18px;
-  --text-color:       rgba(255, 255, 255, 0.8);
-  --text-size:        15px;
-  --hover-color:      white;
+  --text-color:       black;
+  --text-size:        16px;
+  --text-font:        "Fantasy"
+  --hover-color:      black;
   --bkgd-color:       #C5CAE9;
 }
 
