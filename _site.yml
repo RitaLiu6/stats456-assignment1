@@ -4,6 +4,8 @@ description: |
   Rita Liu
 output_dir: "_site"
 navbar:
+  logo:
+    image: initials.png
   right:
     - text: "About"
       href: index.html
