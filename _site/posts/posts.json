@@ -15,5 +15,22 @@
     "preview": "posts/2021-09-07-ttweek1/circuits.png",
     "last_modified": "2021-09-07T17:57:47-05:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-09-21-tidy-tuesday-week-921/",
+    "title": "Tidy Tuesday Week 9/21",
+    "description": "Tidy Tuesday for the second week",
+    "author": [
+      {
+        "name": "Rita Liu",
+        "url": {}
+      }
+    ],
+    "date": "2021-09-07",
+    "categories": [],
+    "contents": "\n\n\nlibrary(tidyverse)     # for graphing and data cleaning\nlibrary(lubridate)     # for date manipulation\nlibrary(ggthemes)      # for even more plotting themes\nlibrary(gganimate)\nlibrary(gifski)\ntheme_set(theme_minimal()) # My favorite ggplot() theme :)\n\n\n\n\n\nbillboard <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-14/billboard.csv')\n\n\n\n\n\nbillboard %>% \n  mutate(week = as.Date(week_id,\"%m/%d/%Y\")) %>% \n  filter(week >= as.Date(\"2021-05-01\") & week <= as.Date(\"2021-06-01\")) %>% \n  arrange(week_position) %>% \n  group_by(week) %>% \n  slice(1:10) %>% \n  ggplot(aes(x = week_position, \n             y = song)) +\n  geom_col() + \n  labs(title = \"Ranking of Top 10 Songs in May of 2021\", \n       subtitle = \"Week: {frame_time}\",\n       x = \"Ranking\",\n       y = \"Song Name\") + \n  transition_time(week)\n\n\n\n\n\nThe graph above shows how the ranking changed in May 2021 for songs that were top 10 for at least one week in May of 2021. I’m interested in creating this graph because I’m curious how the rankings for different songs change over time: will popular songs continue to be popular or will they just be replaced by other songs. From the graph, we can see that for the top 10 songs in May 2021, there are different trends: some remained unchanged over the month but some of the songs are popular in the beginning but end up anonymous. Along the process, I’ve struggled with selecting the top 10 songs of each week but in the end, used “slice” to solve the problem.\n\n\n\n\n",
+    "preview": "posts/2021-09-21-tidy-tuesday-week-921/billboard.gif",
+    "last_modified": "2021-09-21T16:59:11-05:00",
+    "input_file": {}
   }
 ]

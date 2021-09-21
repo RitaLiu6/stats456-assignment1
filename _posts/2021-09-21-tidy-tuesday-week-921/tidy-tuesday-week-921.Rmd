@@ -1,11 +1,11 @@
 ---
 title: "Tidy Tuesday Week 9/21"
 description: |
-  A short description of the post.
+  Tidy Tuesday for the second week
 author:
   - name: Rita Liu
-    url: {}
-date: 09-21-2021
+date: 09-07-2021
+preview: billboard.gif
 output:
   distill::distill_article:
     self_contained: false
@@ -46,10 +46,6 @@ billboard %>%
        y = "Song Name") + 
   transition_time(week)
 ```
-```{r}
-anim_save("billboard.gif")
-```
-```{r}
-knitr::include_graphics("billboard.gif")
-```
 
+
+> The graph above shows how the ranking changed in May 2021 for songs that were top 10 for at least one week in May of 2021. I'm interested in creating this graph because I'm curious how the rankings for different songs change over time: will popular songs continue to be popular or will they just be replaced by other songs. From the graph, we can see that for the top 10 songs in May 2021, there are different trends: some remained unchanged over the month but some of the songs are popular in the beginning but end up anonymous. Along the process, I've struggled with selecting the top 10 songs of each week but in the end, used "slice" to solve the problem. 
