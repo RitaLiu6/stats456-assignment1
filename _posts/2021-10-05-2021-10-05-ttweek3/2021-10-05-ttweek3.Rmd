@@ -1,0 +1,50 @@
+---
+title: "Tidy Tuesday Week 10/06"
+description: |
+  Tidy Tuesday for the thrid week
+author:
+  - name: Rita Liu
+    url: {}
+date: 10-05-2021
+preview: NEBR.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r libraries}
+library(tidyverse)     # for graphing and data cleaning
+library(lubridate)     # for date manipulation
+library(ggthemes)      # for even more plotting themes
+library(ggplot2)
+library(tidytext)
+theme_set(theme_minimal()) # My favorite ggplot() theme :)
+```
+
+
+```{r}
+papers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-28/papers.csv')
+```
+
+
+```{r}
+papers %>% 
+  unnest_tokens(word,title) %>% 
+  anti_join(stop_words) %>% 
+  filter(year>2015 & !grepl("^[0-9]", word)) %>% 
+  count(word,sort = TRUE) %>% 
+  head(20) %>% 
+  ggplot(aes(x = n,y = fct_reorder(word,n))) + 
+  geom_col() + 
+  labs(x = "Number of times appeared",
+       y = "Words",
+       title = "The most frequently used 20 words in titles of NBER papers from 2015-2021") + 
+  theme_minimal()
+```
+
+> The title often reveals the topic of the paper. As a economics major, I'm curious to find out what are the most popular topics in the field in recent 5 years. Therefore, I created the bar graph above, showing the most frequently used 20 words in titles of NBER papers. As the graph suggests, most of the parpers have evidence-based findings and the popular topics in recent years includes: market, policy study, health, labor, covid, and trade. One challenge I faced is to filter out words that are in numbers but in the end I decided to use grepl. If I have more time, I'll try to break titles into shorter phrases instead of single words and see if I could draw more insights from that! 
