@@ -11,10 +11,10 @@
     ],
     "date": "2021-10-14",
     "categories": [],
-    "contents": "\n\nI used billboard dataset from tudytuesday. The data contains hundreds of performers, their songs, and the ranking of the songs in 2021. I’m curious to find out the ranking trend for each song, especially for those performers who have many songs on board more than once. Therefore, in this app, we can select performer and then their individual songs to see how that song ranked in billboard in 2021. For more details, click the link below!\n\nshinnyAppLink\n\n\n\n",
+    "contents": "\n\nI used billboard dataset from tudytuesday. The data contains hundreds of performers, their songs, and the ranking of the songs in 2021. I’m curious to find out the ranking trend for each song, especially for those performers who have many songs on board more than once. Therefore, in this app, we can select performer and then their individual songs to see how that song ranked in billboard in 2021. For more details, click the link below!\n\nshinnyAppLink\ngithubRepoLink\n\n\n\n",
     "preview": "posts/2021-10-14-billboardshinny/billboard_shinny.png",
-    "last_modified": "2021-10-14T23:14:27-05:00",
-    "input_file": {}
+    "last_modified": "2021-10-14T23:18:25-05:00",
+    "input_file": "billboardshinny.knit.md"
   },
   {
     "path": "posts/2021-10-05-2021-10-05-ttweek3/",

@@ -21,4 +21,4 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [shinnyAppLink](https://ritaliu6.shinyapps.io/billboard_shinny/)
 
-
+[githubRepoLink](https://github.com/RitaLiu6/Stat456_Assignment4_shinny)
