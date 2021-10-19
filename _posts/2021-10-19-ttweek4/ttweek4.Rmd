@@ -1,0 +1,55 @@
+---
+title: "Tidy Tuesday Week 10/19"
+description: |
+  Tidy Tuesday for the fourth week. 
+author:
+  - name: Rita Liu
+    url: {}
+date: 10-19-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(tidyr)
+library(stringr)
+library(tidyverse)     # for graphing and data cleaning
+library(lubridate)     # for date manipulation
+library(ggthemes)      # for even more plotting themes
+library(ggplot2)
+library(tidytext)
+theme_set(theme_minimal()) # My favorite ggplot() theme :)
+```
+
+```{r}
+pumpkins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-19/pumpkins.csv')
+```
+
+```{r}
+pumpkins %>% 
+  separate(id, c("year","type")) %>% 
+  mutate(type = ifelse(type == "F","Field Pumpkin",
+                       ifelse(type == "P","Giant Pumpkin",
+                              ifelse(type == "S","Giant Squash",
+                                     ifelse(type == "W","Giant Watermelon",
+                                            ifelse (type== "T","Tomato",
+                                            ifelse (type == "L","Long Gourd",
+                                                    type)))))))%>% 
+  mutate(weight_lbs = as.numeric(weight_lbs)) %>% 
+  group_by(year,type) %>% 
+  summarise(average_weight = mean(weight_lbs,na.rm = TRUE)) %>% 
+  arrange(by = average_weight) %>% 
+  ggplot(aes(x = year, y = average_weight, fill = type)) + 
+  geom_bar(stat = "identity", position = 'dodge') + 
+  labs(y = "average weight",
+       title = "Which types of pumpkin weight mostly heavily over time?") + 
+  scale_fill_hue(l=50, c=50)
+```
+
+> I'm interested in studying which types of pumpkin weight heavily and if that will change over time. Therefore, I summarised the data by group the type of pumpkin by years and calculated the average weight in each group. From the graph, we can see that giant pumpkin always weight the most heavily but shows a slightly decreasing trend. Giant squash is  the second heaviest type of pumpkin from 2013-2021 and its average weight fluctuated. In general, all types of pumpkin seem to have their peak in 2017 or 2018, which is quite interesting to me. One challenge I faced was replace type code with actual type. In the end, I used many ifelse statements but I'm sure there will be easier ways.  

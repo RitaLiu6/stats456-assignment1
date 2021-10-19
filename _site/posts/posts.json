@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-10-19-ttweek4/",
+    "title": "Tidy Tuesday Week 10/19",
+    "description": "Tidy Tuesday for the fourth week.",
+    "author": [
+      {
+        "name": "Rita Liu",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-19",
+    "categories": [],
+    "contents": "\n\n\nlibrary(tidyr)\nlibrary(stringr)\nlibrary(tidyverse)     # for graphing and data cleaning\nlibrary(lubridate)     # for date manipulation\nlibrary(ggthemes)      # for even more plotting themes\nlibrary(ggplot2)\nlibrary(tidytext)\ntheme_set(theme_minimal()) # My favorite ggplot() theme :)\n\n\n\n\n\npumpkins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-19/pumpkins.csv')\n\n\n\n\n\npumpkins %>% \n  separate(id, c(\"year\",\"type\")) %>% \n  mutate(type = ifelse(type == \"F\",\"Field Pumpkin\",\n                       ifelse(type == \"P\",\"Giant Pumpkin\",\n                              ifelse(type == \"S\",\"Giant Squash\",\n                                     ifelse(type == \"W\",\"Giant Watermelon\",\n                                            ifelse (type== \"T\",\"Tomato\",\n                                            ifelse (type == \"L\",\"Long Gourd\",\n                                                    type)))))))%>% \n  mutate(weight_lbs = as.numeric(weight_lbs)) %>% \n  group_by(year,type) %>% \n  summarise(average_weight = mean(weight_lbs,na.rm = TRUE)) %>% \n  arrange(by = average_weight) %>% \n  ggplot(aes(x = year, y = average_weight, fill = type)) + \n  geom_bar(stat = \"identity\", position = 'dodge') + \n  labs(y = \"average weight\",\n       title = \"Which types of pumpkin weight mostly heavily over time?\") + \n  scale_fill_hue(l=50, c=50)\n\n\n\n\n\nI’m interested in studying which types of pumpkin weight heavily and if that will change over time. Therefore, I summarised the data by group the type of pumpkin by years and calculated the average weight in each group. From the graph, we can see that giant pumpkin always weight the most heavily but shows a slightly decreasing trend. Giant squash is the second heaviest type of pumpkin from 2013-2021 and its average weight fluctuated. In general, all types of pumpkin seem to have their peak in 2017 or 2018, which is quite interesting to me. One challenge I faced was replace type code with actual type. In the end, I used many ifelse statements but I’m sure there will be easier ways.\n\n\n\n\n",
+    "preview": "posts/2021-10-19-ttweek4/ttweek4_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2021-10-19T12:37:39-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-10-14-billboardshinny/",
     "title": "Billboard Ranking for Top Singers",
     "description": "A shinny app to billboard ranking!",
@@ -14,7 +31,7 @@
     "contents": "\n\nI used billboard dataset from tudytuesday. The data contains hundreds of performers, their songs, and the ranking of the songs in 2021. I’m curious to find out the ranking trend for each song, especially for those performers who have many songs on board more than once. Therefore, in this app, we can select performer and then their individual songs to see how that song ranked in billboard in 2021. For more details, click the link below!\n\nshinnyAppLink\ngithubRepoLink\n\n\n\n",
     "preview": "posts/2021-10-14-billboardshinny/billboard_shinny.png",
     "last_modified": "2021-10-14T23:18:25-05:00",
-    "input_file": "billboardshinny.knit.md"
+    "input_file": {}
   },
   {
     "path": "posts/2021-10-05-2021-10-05-ttweek3/",
