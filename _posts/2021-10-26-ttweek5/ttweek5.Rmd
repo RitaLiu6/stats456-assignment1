@@ -1,0 +1,69 @@
+---
+title: "Tidy Tuesday Week 10/26"
+description: |
+  Tidy Tuesday for the fifth week. 
+author:
+  - name: Rita Liu
+    url: {}
+date: 10-19-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(tidyr)
+library(stringr)
+library(tidyverse)     # for graphing and data cleaning
+library(lubridate)     # for date manipulation
+library(ggthemes)      # for even more plotting themes
+library(ggplot2)
+library(tidytext)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(countrycode)
+library(sf)
+theme_set(theme_minimal()) # My favorite ggplot() theme :)
+```
+
+```{r}
+captured_vs_farmed <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-12/capture-fisheries-vs-aquaculture.csv')
+world <- ne_countries(scale = "medium", returnclass = "sf")
+```
+
+```{r}
+fisher <- captured_vs_farmed %>% 
+  filter(Year>2000) %>% 
+  drop_na(`Aquaculture production (metric tons)`) %>% 
+  mutate(countrycode = countrycode::countryname(Entity, destination = "iso2c"),
+         acratio = `Aquaculture production (metric tons)`/(`Aquaculture production (metric tons)`+`Capture fisheries production (metric tons)`))%>% 
+  filter(!is.na(countrycode)) %>% 
+  group_by(countrycode) %>% 
+  summarise(avg_acratio = mean(acratio,na.rm = TRUE))
+ 
+```
+
+```{r fig.width=15, fig.height=15}
+world %>% 
+  left_join(fisher, by = c("iso_a2" = "countrycode")) %>% 
+  ggplot() + 
+  geom_sf(aes(fill = avg_acratio)) + 
+  coord_sf(crs = st_crs(3035)) + 
+  geom_sf_text(aes(label = abbrev),na.rm = TRUE, size=2)+
+  scale_fill_gradient() + 
+  labs(fill = "Average Ratio",
+       title = "Average Ratio of Farmed Fisheries to Total Production of the World (2000-2021)",
+       x = '',
+       y = '') + 
+  theme(plot.title = element_text(family = "Helvetica", 
+                                  face = "bold", 
+                                  size = (20),
+                                  hjust = 0.5))
+```
+
+> After knowing more about how aquaculture fisheries can help to ease the pressure of over-fishing. Therefore, since I got data for almost all the countries, I am curious to learn which countries, in general, would have relatively more aquaculture fisheries production. I was also wondering if this number could be related with the location or the size of the country. Therefore, I used geom_sf to help me plot a map that indicates average ratio of farmed fisheries production to total fisheries production of the world from 2000-2021. The grey area suggests that the numbers are not available. As we can see, most of the countries in lighter blue (meaning they produce relatively more aquaculture fishes) seems to be in Europe or in Asia. Belarus and Austria seem to have the most aquaculture fisheries production on relative scale. One failure of the plot is the labels are not very clear. Also, if I have more time, I will be interested to make an animination, to show how this ratio changed over years. 
