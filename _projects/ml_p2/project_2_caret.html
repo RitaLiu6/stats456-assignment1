@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species</title>
+  
+  <meta property="description" itemprop="description" content="In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R."/>
+  
+  
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2020-12-11"/>
+  <meta property="article:created" itemprop="dateCreated" content="2020-12-11"/>
+  <meta name="article:author" content="Rita Liu"/>
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R."/>
+  <meta property="og:locale" content="en_US"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species"/>
+  <meta property="twitter:description" content="In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R."/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species"]},{"type":"character","attributes":{},"value":["In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R. \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Rita Liu"]}]}]},{"type":"character","attributes":{},"value":["12-11-2020"]},{"type":"character","attributes":{},"value":["pengiuns.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["pengiuns.png","project_2_caret_files/anchor-4.2.2/anchor.min.js","project_2_caret_files/bowser-1.9.3/bowser.min.js","project_2_caret_files/distill-2.2.21/template.v2.js","project_2_caret_files/figure-html5/unnamed-chunk-12-1.png","project_2_caret_files/figure-html5/unnamed-chunk-13-1.png","project_2_caret_files/figure-html5/unnamed-chunk-15-1.png","project_2_caret_files/figure-html5/unnamed-chunk-16-1.png","project_2_caret_files/figure-html5/unnamed-chunk-17-1.png","project_2_caret_files/figure-html5/unnamed-chunk-18-1.png","project_2_caret_files/figure-html5/unnamed-chunk-22-1.png","project_2_caret_files/figure-html5/unnamed-chunk-22-2.png","project_2_caret_files/figure-html5/unnamed-chunk-22-3.png","project_2_caret_files/figure-html5/unnamed-chunk-23-1.png","project_2_caret_files/figure-html5/unnamed-chunk-23-2.png","project_2_caret_files/figure-html5/unnamed-chunk-23-3.png","project_2_caret_files/figure-html5/unnamed-chunk-26-1.png","project_2_caret_files/figure-html5/unnamed-chunk-27-1.png","project_2_caret_files/figure-html5/unnamed-chunk-3-1.png","project_2_caret_files/figure-html5/unnamed-chunk-30-1.png","project_2_caret_files/figure-html5/unnamed-chunk-30-2.png","project_2_caret_files/figure-html5/unnamed-chunk-30-3.png","project_2_caret_files/figure-html5/unnamed-chunk-30-4.png","project_2_caret_files/figure-html5/unnamed-chunk-31-1.png","project_2_caret_files/figure-html5/unnamed-chunk-31-2.png","project_2_caret_files/figure-html5/unnamed-chunk-33-1.png","project_2_caret_files/figure-html5/unnamed-chunk-33-2.png","project_2_caret_files/figure-html5/unnamed-chunk-33-3.png","project_2_caret_files/figure-html5/unnamed-chunk-33-4.png","project_2_caret_files/figure-html5/unnamed-chunk-34-1.png","project_2_caret_files/figure-html5/unnamed-chunk-34-2.png","project_2_caret_files/figure-html5/unnamed-chunk-4-1.png","project_2_caret_files/figure-html5/unnamed-chunk-8-1.png","project_2_caret_files/figure-html5/unnamed-chunk-9-1.png","project_2_caret_files/jquery-1.11.3/jquery.min.js","project_2_caret_files/popper-2.6.0/popper.min.js","project_2_caret_files/tippy-6.2.7/tippy-bundle.umd.min.js","project_2_caret_files/tippy-6.2.7/tippy-light-border.css","project_2_caret_files/tippy-6.2.7/tippy.css","project_2_caret_files/tippy-6.2.7/tippy.umd.min.js","project_2_caret_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+  
+  <style type="text/css">
+  
+  body {
+    background-color: white;
+  }
+  
+  .pandoc-table {
+    width: 100%;
+  }
+  
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+  
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+  
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+  
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+  
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+  
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+  
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+  
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+  
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+  
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+  
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+  
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
+  }
+  
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+  
+  d-appendix {
+    padding-top: 30px;
+  }
+  
+  d-article>p>img {
+    width: 100%;
+  }
+  
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+  
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+  
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+  
+  /* Tweak code blocks */
+  
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+  
+  d-article div.sourceCode {
+    background-color: white;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+  
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  d-article pre a {
+    border-bottom: none;
+  }
+  
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+  
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+  
+  @media(min-width: 768px) {
+  
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+  
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+  
+  d-article pre {
+    font-size: 14px;
+  }
+  
+  }
+  
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  /* CSS for d-contents */
+  
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+  
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+  
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+  
+  .d-contents li {
+    list-style-type: none
+  }
+  
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+  
+  .d-contents ul {
+    padding-left: 1em
+  }
+  
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+  
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+  
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+  
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+  
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+  
+  
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+  
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+  
+  
+  /* Figure */
+  
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+  
+  .figure img {
+    width: 100%;
+  }
+  
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+  
+  /* Citations */
+  
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+  
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+  
+  /* Citation hover box */
+  
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+  
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+  
+  
+  /* Tweak 1000px media break to show more text */
+  
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+  
+    .grid {
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+  
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+  
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+  
+  
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+  
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* Include appendix styles here so they can be overridden */
+  
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+  
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+  
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+  
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+  
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+  
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+  
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  d-appendix > * {
+    grid-column: text;
+  }
+  
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+  
+  /* Include footnote styles here so they can be overridden */
+  
+  d-footnote-list {
+    contain: layout style;
+  }
+  
+  d-footnote-list > * {
+    grid-column: text;
+  }
+  
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+  
+  
+  
+  /* Anchor.js */
+  
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+  
+  /* Social footer */
+  
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+  
+  .disqus-comments {
+    margin-right: 30px;
+  }
+  
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  
+  #disqus_thread {
+    margin-top: 30px;
+  }
+  
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+  
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+  
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+  
+  
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+  
+  /* Styles for posts lists (not auto-injected) */
+  
+  
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+  
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+  
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+  
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+  
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+  
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+  
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+  
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+  
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+  
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+  
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+  
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+  
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .posts-list img {
+    opacity: 1;
+  }
+  
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+  
+  .posts-more {
+    clear: both;
+  }
+  
+  
+  .posts-sidebar {
+    font-size: 16px;
+  }
+  
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+  
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+  
+  .categories li>a {
+    border-bottom: none;
+  }
+  
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+  
+  .categories .active {
+    font-weight: 600;
+  }
+  
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+  
+  
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+  
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+  
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+  
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+  
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+  
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+  
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+  
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+  
+  
+  
+  </style>
+  
+  <script type="application/javascript">
+  
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+  
+  // show body when load is complete
+  function on_load_complete() {
+  
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+  
+  
+    // set body to visible
+    document.body.style.visibility = 'visible';
+  
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+  
+  function init_distill() {
+  
+    init_common();
+  
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+  
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+  
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+  
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+  
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+  
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+  
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+  
+      // capture layout
+      var layout = $(this).attr('data-layout');
+  
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
+  
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+  
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+  
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+  
+    // load distill framework
+    load_distill_framework();
+  
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+  
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+  
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+  
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+  
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+  
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+  
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+  
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+  
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+  
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+  
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+  
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+  
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+  
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+  
+      // clear polling timer
+      clearInterval(tid);
+  
+      // show body now that everything is ready
+      on_load_complete();
+    }
+  
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+  
+  }
+  
+  function init_downlevel() {
+  
+    init_common();
+  
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+  
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+  
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+  
+    // remove toc
+    $('.d-contents').remove();
+  
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+  
+  
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+  
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+  
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+  
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+  
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+  
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+  
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+  
+    $('body').addClass('downlevel');
+  
+    on_load_complete();
+  }
+  
+  
+  function init_common() {
+  
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+  
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+  
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+  
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+  
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+  
+      }
+    });
+  
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+  
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+  
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+  
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+  
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+  
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+  
+  </script>
+  
+  <!--/radix_placeholder_distill-->
+  <script src="project_2_caret_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="project_2_caret_files/popper-2.6.0/popper.min.js"></script>
+  <link href="project_2_caret_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="project_2_caret_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="project_2_caret_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="project_2_caret_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="project_2_caret_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="project_2_caret_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="project_2_caret_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species","description":"In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R.","authors":[{"author":"Rita Liu","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-12-11T00:00:00.000+00:00","citationText":"Liu, 2020"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>In this project, I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R.</p></p>
+</div>
+
+<div class="d-byline">
+  Rita Liu  
+  
+<br/>12-11-2020
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#setting-up">Setting Up</a></li>
+<li><a href="#part-1-svm-overview">Part 1: SVM Overview</a><ul>
+<li><a href="#placement-within-the-machine-learning-workflow">Placement within the machine learning workflow</a></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#tuning">Tuning</a></li>
+<li><a href="#potential-drawbacks">Potential drawbacks</a></li>
+</ul></li>
+<li><a href="#part-2-using-svm-on-pengiuns-classification-selected-variables">Part 2: Using SVM on Pengiuns Classification (Selected Variables)</a><ul>
+<li><a href="#kernel-selection-linear-radial-or-polynomial">Kernel selection: linear, radial, or polynomial?</a></li>
+<li><a href="#comparision-with-the-logistic-model">Comparision with the logistic model</a></li>
+</ul></li>
+<li><a href="#part-3-using-svm-on-pengiuns-classification-all-variables">Part 3: Using SVM on Pengiuns Classification (All Variables)</a><ul>
+<li><a href="#kernel-tuning-parameter-selection">Kernel &amp; tuning parameter selection</a></li>
+<li><a href="#comparison-with-logistic-model">Comparison with logistic model</a></li>
+</ul></li>
+<li><a href="#part-4-what-the-model-shows">Part 4: What the Model Shows?</a></li>
+<li><a href="#reference">Reference:</a></li>
+</ul>
+</nav>
+</div>
+<p><br />
+<br />
+</p>
+<h2 id="setting-up">Setting Up</h2>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/topepo/caret/'>caret</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>e1071</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ipa-tys.github.io/ROCR/'>ROCR</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://expasy.org/tools/pROC/'>pROC</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="part-1-svm-overview">Part 1: SVM Overview</h2>
+<h3 id="placement-within-the-machine-learning-workflow">Placement within the machine learning workflow</h3>
+<p>SVM vs Logistic Regression: SMV is also a parametric model and it will be more advantageous when the boundaries between different catergories are not linear.</p>
+<p>SVM vs KNN: Both of the model allow non-linear boundaries for classification. However, when we have many predictors or features, SVM would perform better than KNN because KNN suffers from curse of dimensionality.</p>
+<p>SVM vs tree: I personally think that SVM is a less greedy algorithm comparing to tree model because tree makes best splits without considering the future split. However, for SVM, we won’t have such a concern.</p>
+<h3 id="definition">Definition</h3>
+<p>In short, the SVM model uses a separating hyperplane to classify observations.<br />
+A separating hyperplane <span class="math inline">\(f(x_1,x_2,...,x_n)\)</span> is a plane in space which can separate different levels of the observations based on the features. The observations fall into two classes, we use -1 to represent one class and 1 to represents the other class,that is <span class="math inline">\(y_{i} ∈ \{-1,1\}\)</span>. As a result, a hyperplane has the following property: <span class="math inline">\(y_{i}*f(x_1,x_2,...,x_n) &gt; 0\)</span>.</p>
+<p><br />
+</p>
+<p>However, there are many hyperplanes that can separate the observations, as we can see from the figure below. <img src="/Users/ritaliu/Desktop/Fall_2020/STATS253/project%202/F1.png" alt="figure 1" /> Since we want to choose the plane that best separates two classes, we want the plane to have the farthest minimum distance or margin from the observations. In the language of math, that is, <span class="math inline">\(y_{i}*f(x_1,x_2,...,x_n) &gt; = M\)</span>, where M is the farthest minimum distance from the hyperplane to the observations.<br />
+As we can see from the figure below, three training observations are on the dashed line, meaning that the distance between these three observations and the separating hyperplane is the margin. Those points are support vectors, because if they move, the hyperplane would change. <img src="/Users/ritaliu/Desktop/Fall_2020/STATS253/project%202/F2.png" /><br />
+Not all observations can be perfectly separated into two classes by a plane and we could allow misclassifying of some a few observations by adding slack variables <span class="math inline">\(ε\)</span> and the hyperplane satisfies <span class="math inline">\(y_{i}*f(x_1,x_2,...,x_n) &gt; = M*(1-ε_i)\)</span>. When <span class="math inline">\(ε_i=0\)</span>, the observation is on the correct side of the margin; when <span class="math inline">\(ε_i&gt;0\)</span>, the observation is on the wrong side of the margin; and when <span class="math inline">\(ε_i&gt;1\)</span>, it’s on the wrong side of the plane. For example, as the graph below demonstrates, observation 12 and 11 would have a slack variable bigger than 1 because they are on the wrong side of the hyperplane.</p>
+<p><img src="/Users/ritaliu/Desktop/Fall_2020/STATS253/project%202/F3.png" /></p>
+<p><br />
+Hyperplane function <span class="math inline">\(f(x_i)\)</span> can have different forms or take in different kernels which allow us to have non-linear boundaries. For example, in the graph below, the figure on the left uses a polynomial kernel and the figure on the right uses a radial kernel.<br />
+<img src="/Users/ritaliu/Desktop/Fall_2020/STATS253/project%202/F4.png" /><br />
+<br />
+<br />
+</p>
+<h3 id="tuning">Tuning</h3>
+<p>The tuning parameter for SVM is cost, which is defined as the sum of <span class="math inline">\(εi\)</span>. When the cost is big, the width of the margin will be wilder and many points can violate the margin. While when the cost is small, the width of the margin will be small and fewer misclassifications will be tolerated.<br />
+Besides cost C, there are other tuning parameters according to what kernels we use. If we use the radial kernel, we also need to decide on sigma. The larger the sigma, the more non-linear is the boundary. And for the polynomial kernel, two other tuning parameters are scale, which helps us to normalize the pattern, and degree, which sets the degree for the kernel.</p>
+<h3 id="potential-drawbacks">Potential drawbacks</h3>
+<p>SVM attempts to use a hyperplane to divide classes. However, when there are many noises in the observation, SVM probably cannot perform very well. Moreover, unlike tree and KNN, SVM does not allow us to classify observations to more than two levels. Also, we can’t get a probabilistic result like those generated by logistic models.</p>
+<br />
+<br />
+<br />
+
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Import raw data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>penguins</span><span class='op'>)</span>
+
+<span class='co'># Check out the codebook by typing this in your console</span>
+<span class='co'>#?penguins</span>
+
+<span class='co'># Create a new hybrid </span>
+<span class='co'># And take a smaller sample (just for the purposes of this project)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>new_penguins</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>species <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span>
+    <span class='va'>species</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Adelie"</span>,<span class='st'>"Gentoo"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Adelgen"</span>,
+    <span class='va'>species</span> <span class='op'>==</span> <span class='st'>"Chinstrap"</span> <span class='op'>~</span> <span class='st'>"Chinstrap"</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample_n.html'>sample_n</a></span><span class='op'>(</span><span class='fl'>68</span><span class='op'>)</span>
+
+<span class='co'># preprocess the data</span>
+<span class='va'>new_penguins</span> <span class='op'>&lt;-</span> <span class='va'>new_penguins</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>year</span><span class='op'>)</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>island<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>island</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="part-2-using-svm-on-pengiuns-classification-selected-variables">Part 2: Using SVM on Pengiuns Classification (Selected Variables)</h2>
+<blockquote>
+<p>This section, I will use the SVM model introduced before to predict the species of pengiuns. Here, I only use the bill_length and bill_width as predictors.</p>
+</blockquote>
+<h3 id="kernel-selection-linear-radial-or-polynomial">Kernel selection: linear, radial, or polynomial?</h3>
+<blockquote>
+<p>There are three methods for the SVM model: linear, radial, and poly. Using different methods will give us different types of separating hyperplanes. To choose the method that can best capture the differences between groups, I first studied the bill length and bill depth of different species by looking at the scatterplot. According to the graph, the boundary between Adelgen and Chinstrap seems to be an ellipse so my initial guess is that svmRadical would be a more proper method.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>new_penguins</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>bill_length_mm</span>,y<span class='op'>=</span><span class='va'>bill_depth_mm</span>,color<span class='op'>=</span><span class='va'>species</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p><br />
+</p>
+<blockquote>
+<p>Then I built three SVM models using “svmRadial”, “svmLinear”, and “simply” separately to compare their cv accuracy and to decide which model generated the most accurate predictions. Below shows the cv accuracy of using “svmRadial”, “svmLinear”, and “svmPoly” respectively. Note that the caret package will automatically choose the optimal model tuning parameters, where optimal is defined as values that maximize the cv accuracy (Campbell,2020). As we can see, the cv accuracies of the models built using “svmRadial” and “svmPoly” are the same and both are higher than the cv accuracy generated by using “svmLinear”: on average, there is 0.9619 chance to guess the species of a penguin right using these two model. Integrating my previous guess based on the scatterplot, I would choose to use “svmRadial”. Now the problem is what tuning parameter to choose.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmR</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+     <span class='va'>species</span><span class='op'>~</span> <span class='va'>bill_length_mm</span> <span class='op'>+</span> <span class='va'>bill_depth_mm</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmRadial"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span>, classProbs <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+    tuneLength <span class='op'>=</span> <span class='fl'>10</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+<span class='va'>svmR</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>sigma</span><span class='op'>==</span><span class='va'>svmR</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>sigma</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmR</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span> <span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>     sigma   C  Accuracy     Kappa AccuracySD   KappaSD
+1 3.663707 0.5 0.9547619 0.9095238 0.05549884 0.1109977</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmL</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+     <span class='va'>species</span><span class='op'>~</span> <span class='va'>bill_length_mm</span> <span class='op'>+</span> <span class='va'>bill_depth_mm</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmLinear"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    tuneLength <span class='op'>=</span> <span class='fl'>10</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+<span class='va'>svmL</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmL</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>  C  Accuracy     Kappa AccuracySD   KappaSD
+1 1 0.8357143 0.6714286 0.08357863 0.1671573</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmP</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='va'>species</span><span class='op'>~</span> <span class='va'>bill_length_mm</span> <span class='op'>+</span> <span class='va'>bill_depth_mm</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmPoly"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    tuneLength <span class='op'>=</span> <span class='fl'>4</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>svmP</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>degree</span><span class='op'>==</span><span class='va'>svmP</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>degree</span><span class='op'>)</span><span class='op'>&amp;</span><span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmP</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span><span class='op'>&amp;</span><span class='op'>(</span><span class='va'>scale</span><span class='op'>==</span><span class='va'>svmP</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>scale</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>  degree scale   C  Accuracy     Kappa AccuracySD   KappaSD
+1      3     1 0.5 0.9619048 0.9238095 0.05634362 0.1126872</code></pre>
+</div>
+<blockquote>
+<p>The model suggests the best tuning parameter is when sigma = 3.663707 and cost = 0.5. As we can see from the graph, when we choose tuning parameter cost = 0.5, the cv accuracy is indeed the highest.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>svmR</span><span class='op'>$</span><span class='va'>bestTune</span>
+</code></pre>
+</div>
+</details>
+<pre><code>     sigma   C
+2 3.663707 0.5</code></pre>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/pROC/man/plot.roc.html'>plot</a></span><span class='op'>(</span><span class='va'>svmR</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<h3 id="comparision-with-the-logistic-model">Comparision with the logistic model</h3>
+<blockquote>
+<p>I first looked at the confusion matrix of both models. First of all, for both models, P-Value [Acc &gt; NIR] are small, suggesting that both model perform better than we doing a random guess. However, both sensitivity and specificity using “svmRadial” model are higher and the in-sample accuracy is also higher for “svmRadial” model (0.99&gt;0.85). Therefore, it seems that “svmRadial” model does a better job for in-sample prediction, which is also supported by the ROC graph. The black line is the ROC for my SVM model and the red curve is the ROC for logistic model. The area under the curve for SVM model is bigger, showing that using SVM model, we has a higher probability to correctly identify Adelgen penguins as Adelgen, Chinstrap penguins as Chinstrap.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>logistic_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='va'>species</span> <span class='op'>~</span> <span class='va'>bill_length_mm</span><span class='op'>+</span><span class='va'>bill_depth_mm</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"glm"</span>,
+    family <span class='op'>=</span> <span class='st'>"binomial"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>predict_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>svmR</span><span class='op'>$</span><span class='va'>trainingData</span><span class='op'>)</span>
+<span class='co'>#p1&lt;-predict(svmR,predict_data)</span>
+<span class='co'>#roc(response=predict_data$.outcome,pred=as.numeric(p1),plot=TRUE, legacy.axes=TRUE)</span>
+<span class='va'>classifications_svmR</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>svmR</span>, newdata <span class='op'>=</span> <span class='va'>predict_data</span>, type <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/caret/man/confusionMatrix.html'>confusionMatrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>classifications_svmR</span>, 
+  reference <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predict_data</span><span class='op'>$</span><span class='va'>.outcome</span><span class='op'>)</span>, 
+  positive <span class='op'>=</span> <span class='st'>"Adelgen"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Adelgen Chinstrap
+  Adelgen        67         1
+  Chinstrap       1        67
+                                          
+               Accuracy : 0.9853          
+                 95% CI : (0.9479, 0.9982)
+    No Information Rate : 0.5             
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.9706          
+                                          
+ Mcnemar&#39;s Test P-Value : 1               
+                                          
+            Sensitivity : 0.9853          
+            Specificity : 0.9853          
+         Pos Pred Value : 0.9853          
+         Neg Pred Value : 0.9853          
+             Prevalence : 0.5000          
+         Detection Rate : 0.4926          
+   Detection Prevalence : 0.5000          
+      Balanced Accuracy : 0.9853          
+                                          
+       &#39;Positive&#39; Class : Adelgen         
+                                          </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>classifications_log</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>logistic_model</span>, newdata <span class='op'>=</span> <span class='va'>predict_data</span>, type <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/caret/man/confusionMatrix.html'>confusionMatrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>classifications_log</span>, 
+  reference <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predict_data</span><span class='op'>$</span><span class='va'>.outcome</span><span class='op'>)</span>, 
+  positive <span class='op'>=</span> <span class='st'>"Adelgen"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Adelgen Chinstrap
+  Adelgen        60        12
+  Chinstrap       8        56
+                                          
+               Accuracy : 0.8529          
+                 95% CI : (0.7821, 0.9078)
+    No Information Rate : 0.5             
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.7059          
+                                          
+ Mcnemar&#39;s Test P-Value : 0.5023          
+                                          
+            Sensitivity : 0.8824          
+            Specificity : 0.8235          
+         Pos Pred Value : 0.8333          
+         Neg Pred Value : 0.8750          
+             Prevalence : 0.5000          
+         Detection Rate : 0.4412          
+   Detection Prevalence : 0.5294          
+      Balanced Accuracy : 0.8529          
+                                          
+       &#39;Positive&#39; Class : Adelgen         
+                                          </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p1</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>svmR</span>,<span class='va'>predict_data</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pROC/man/roc.html'>roc</a></span><span class='op'>(</span>response<span class='op'>=</span><span class='va'>predict_data</span><span class='op'>$</span><span class='va'>.outcome</span>,pred<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span>,plot<span class='op'>=</span><span class='cn'>TRUE</span>, legacy.axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+roc.default(response = predict_data$.outcome, predictor = as.numeric(p1),     plot = TRUE, legacy.axes = TRUE)
+
+Data: as.numeric(p1) in 68 controls (predict_data$.outcome Adelgen) &lt; 68 cases (predict_data$.outcome Chinstrap).
+Area under the curve: 0.9853</code></pre>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>new<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pROC/man/roc.html'>roc</a></span><span class='op'>(</span>response<span class='op'>=</span><span class='va'>predict_data</span><span class='op'>$</span><span class='va'>.outcome</span>,pre<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/fitted.values.html'>fitted</a></span><span class='op'>(</span><span class='va'>logistic_model</span><span class='op'>)</span>,plot<span class='op'>=</span><span class='cn'>TRUE</span>,legacy.axes<span class='op'>=</span><span class='cn'>TRUE</span>,col<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+<pre><code>
+Call:
+roc.default(response = predict_data$.outcome, predictor = fitted(logistic_model),     plot = TRUE, legacy.axes = TRUE, col = 2)
+
+Data: fitted(logistic_model) in 68 controls (predict_data$.outcome Adelgen) &lt; 68 cases (predict_data$.outcome Chinstrap).
+Area under the curve: 0.9369</code></pre>
+</div>
+<blockquote>
+<p>Then I compared the cross-validation accuracy of these two models. First of all, the cv accuracies for both models are similar to the in-sample accuracy, suggesting that non of them overfits the data. The cv accuracy for the “svmRadial” model is 0.9619048 and the cv accuracy for the logistic model is 0.8440476, meaning that on average, we would have a higher chance to correctly classify a penguin using the “svmRadial” model.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>svmR</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>sigma</span><span class='op'>==</span><span class='va'>svmR</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>sigma</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmR</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span> <span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>     sigma   C  Accuracy     Kappa AccuracySD   KappaSD
+1 3.663707 0.5 0.9547619 0.9095238 0.05549884 0.1109977</code></pre>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>logistic_model</span><span class='op'>$</span><span class='va'>results</span>
+</code></pre>
+</div>
+</details>
+<pre><code>  parameter  Accuracy     Kappa AccuracySD   KappaSD
+1      none 0.8440476 0.6880952  0.1010854 0.2021708</code></pre>
+</div>
+<blockquote>
+<p>Using both in-sample and cross-validation approaches, “svmRadial” seems to be a better model. Graphs below show the classification regions defined by my SVM model and the logistic model. As we can see, when we use the “svmRadial”, there are only about 3 cases in the sample that has been misclassified. However, when we used the logistic model, many cases are misclassified. These illustrations also help to prove that the “svmRadial” model might be a better classification model for this dataset.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_data</span><span class='op'>&lt;-</span><span class='va'>new_penguins</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>species<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>species</span>,<span class='va'>bill_length_mm</span>,<span class='va'>bill_depth_mm</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>svmRfit</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/e1071/man/svm.html'>svm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>~</span><span class='va'>bill_depth_mm</span><span class='op'>+</span><span class='va'>bill_length_mm</span>, data<span class='op'>=</span><span class='va'>new_penguins</span>, kernel<span class='op'>=</span><span class='st'>"radial"</span>, cost<span class='op'>=</span><span class='fl'>0.5</span>,gamma<span class='op'>=</span><span class='fl'>3.663707</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pROC/man/plot.roc.html'>plot</a></span><span class='op'>(</span><span class='va'>svmRfit</span>,<span class='va'>penguins_data</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>logistic_model</span><span class='op'>$</span><span class='va'>finalModel</span>
+<span class='va'>clog</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>y</span><span class='op'>=</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>/</span><span class='fl'>1.2608</span><span class='op'>)</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>39.8641</span><span class='op'>-</span><span class='fl'>0.3964</span><span class='op'>*</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span> <span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>new_penguins</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>bill_length_mm</span>,y<span class='op'>=</span><span class='va'>bill_depth_mm</span>,color<span class='op'>=</span><span class='va'>species</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span>intercept<span class='op'>=</span><span class='fl'>39.8641</span><span class='op'>/</span><span class='fl'>1.2608</span>, slope <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.3964</span><span class='op'>/</span><span class='fl'>1.2608</span>, linetype<span class='op'>=</span><span class='st'>'solid'</span>, color<span class='op'>=</span><span class='st'>'black'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-17-1.png" width="624" /></p>
+</div>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+<h2 id="part-3-using-svm-on-pengiuns-classification-all-variables">Part 3: Using SVM on Pengiuns Classification (All Variables)</h2>
+<blockquote>
+<p>This section, I will use the SVM model introduced before to predict the species of pengiuns. Here, I only use the bill_length and bill_width as predictors.</p>
+</blockquote>
+<h3 id="kernel-tuning-parameter-selection">Kernel &amp; tuning parameter selection</h3>
+<blockquote>
+<p>Similar to what I did in the previous part, to classify penguins using all the predictors in the dataset, I first compared the results using “svmLinear”, “svmRadial”, and “svmPloy” to decide which method generates better results. It turns out that “svmPoly” and “svmLinear” might be better methods than “svmRadial” because “svmRadial” has a lower cross-validation accuracy compare to the other two methods. The three graphs below show the relationship between the cost and the cross-validation accuracy using “svmRadial”, “svmLinear”, and “svmPloy” respectively. they visually demonstrate that on average, using “svmLinear” and “svmPloy” would have a higher chance to correctly classify the penguins. According to “svmPoly”, the best degree that optimizes the cv accuracy is 1, suggesting that a linear kernel might be a reasonable choice. Therefore, I would choose using “svmLinear” with a cost of 6.210526, which also makes sense by looking at the graph: when the cost is 6.210526, the cv accuracy is higher than using other tuning parameters.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmR_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+     <span class='va'>species</span><span class='op'>~</span> <span class='va'>.</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmRadial"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    tuneLength <span class='op'>=</span> <span class='fl'>10</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+<span class='va'>svmR_f</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>sigma</span><span class='op'>==</span><span class='va'>svmR_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>sigma</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmL</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>      sigma C Accuracy     Kappa AccuracySD    KappaSD
+1 0.5265182 1 0.977381 0.9547619 0.03656397 0.07312793</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmL_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='va'>species</span><span class='op'>~</span> <span class='va'>.</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmLinear"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span>, classProbs <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+    tuneGrid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>100</span>, length <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+<span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>         C  Accuracy     Kappa AccuracySD    KappaSD
+1 6.210526 0.9916667 0.9833333 0.02635231 0.05270463</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmP_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='va'>species</span><span class='op'>~</span> <span class='va'>.</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmPoly"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    tuneLength <span class='op'>=</span> <span class='fl'>4</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+<span class='va'>svmP_f</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>degree</span><span class='op'>==</span><span class='va'>svmP_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>degree</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmP_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>(</span><span class='va'>scale</span><span class='op'>==</span><span class='va'>svmP_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>scale</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>  degree scale    C  Accuracy     Kappa AccuracySD   KappaSD
+1      1     1 0.25 0.9928571 0.9857143  0.0225877 0.0451754</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>svmP_f2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>~</span> <span class='va'>.</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"svmPoly"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    tuneGrid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>C<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>,<span class='fl'>0.5</span>,<span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>,degree<span class='op'>=</span><span class='fl'>1</span>,scale<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/pROC/man/plot.roc.html'>plot</a></span><span class='op'>(</span><span class='va'>svmR_f</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-22-1.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/pROC/man/plot.roc.html'>plot</a></span><span class='op'>(</span><span class='va'>svmL_f</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-22-2.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/pROC/man/plot.roc.html'>plot</a></span><span class='op'>(</span><span class='va'>svmP_f2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-22-3.png" width="624" /></p>
+</div>
+<h3 id="comparison-with-logistic-model">Comparison with logistic model</h3>
+<blockquote>
+<p>Similarly, to compare my SVM model with the logistic model, I took in-sample and cross-validation approaches. Both models perform well for in-sample data. Logistic model is slightly better with in-sample classification, with an accuracy of 1 and both sensitivity and specificity being 1. Their ROC curves (showing below) are also very close together and the areas under the curve are both about 1. (The red one is the ROC curve by logistic model and the black line is the ROC curve for my SVM model.) However, my SVM model does have a higher cv accuracy (0.99&gt;0.97). Therefore, my SVM model is slightly better in terms of classifying penguins outside of our sample.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>253</span><span class='op'>)</span>
+<span class='va'>logistic_f_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/train.html'>train</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>.</span>,
+    data <span class='op'>=</span> <span class='va'>new_penguins</span>,
+    method <span class='op'>=</span> <span class='st'>"glm"</span>,
+    family <span class='op'>=</span> <span class='st'>"binomial"</span>,
+    trControl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/caret/man/trainControl.html'>trainControl</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"cv"</span>, number <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+    metric <span class='op'>=</span> <span class='st'>"Accuracy"</span>,
+    na.action <span class='op'>=</span> <span class='va'>na.omit</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>predict_data_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>trainingData</span><span class='op'>)</span>
+<span class='va'>classifications_svmL_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>svmL_f</span>, newdata <span class='op'>=</span> <span class='va'>predict_data_f</span>, type <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/caret/man/confusionMatrix.html'>confusionMatrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>classifications_svmL_f</span>, 
+  reference <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predict_data_f</span><span class='op'>$</span><span class='va'>.outcome</span><span class='op'>)</span>, 
+  positive <span class='op'>=</span> <span class='st'>"Adelgen"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Adelgen Chinstrap
+  Adelgen        67         1
+  Chinstrap       0        67
+                                          
+               Accuracy : 0.9926          
+                 95% CI : (0.9594, 0.9998)
+    No Information Rate : 0.5037          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.9852          
+                                          
+ Mcnemar&#39;s Test P-Value : 1               
+                                          
+            Sensitivity : 1.0000          
+            Specificity : 0.9853          
+         Pos Pred Value : 0.9853          
+         Neg Pred Value : 1.0000          
+             Prevalence : 0.4963          
+         Detection Rate : 0.4963          
+   Detection Prevalence : 0.5037          
+      Balanced Accuracy : 0.9926          
+                                          
+       &#39;Positive&#39; Class : Adelgen         
+                                          </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>classifications_log_f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>logistic_f_model</span>, newdata <span class='op'>=</span> <span class='va'>predict_data_f</span>, type <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/caret/man/confusionMatrix.html'>confusionMatrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>classifications_log_f</span>, 
+  reference <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predict_data_f</span><span class='op'>$</span><span class='va'>.outcome</span><span class='op'>)</span>, 
+  positive <span class='op'>=</span> <span class='st'>"Adelgen"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Adelgen Chinstrap
+  Adelgen        67         0
+  Chinstrap       0        68
+                                    
+               Accuracy : 1         
+                 95% CI : (0.973, 1)
+    No Information Rate : 0.5037    
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16 
+                                    
+                  Kappa : 1         
+                                    
+ Mcnemar&#39;s Test P-Value : NA        
+                                    
+            Sensitivity : 1.0000    
+            Specificity : 1.0000    
+         Pos Pred Value : 1.0000    
+         Neg Pred Value : 1.0000    
+             Prevalence : 0.4963    
+         Detection Rate : 0.4963    
+   Detection Prevalence : 0.4963    
+      Balanced Accuracy : 1.0000    
+                                    
+       &#39;Positive&#39; Class : Adelgen   
+                                    </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>predict_data2</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>trainingData</span><span class='op'>)</span>
+<span class='va'>p2</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>svmL_f</span>,<span class='va'>predict_data2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pROC/man/roc.html'>roc</a></span><span class='op'>(</span>response<span class='op'>=</span><span class='va'>predict_data2</span><span class='op'>$</span><span class='va'>.outcome</span>,pred<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>p2</span><span class='op'>)</span>,plot<span class='op'>=</span><span class='cn'>TRUE</span>, legacy.axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>
+Call:
+roc.default(response = predict_data2$.outcome, predictor = as.numeric(p2),     plot = TRUE, legacy.axes = TRUE)
+
+Data: as.numeric(p2) in 67 controls (predict_data2$.outcome Adelgen) &lt; 68 cases (predict_data2$.outcome Chinstrap).
+Area under the curve: 0.9926</code></pre>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>new<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/pROC/man/roc.html'>roc</a></span><span class='op'>(</span>response<span class='op'>=</span><span class='va'>predict_data2</span><span class='op'>$</span><span class='va'>.outcome</span>,pre<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/fitted.values.html'>fitted</a></span><span class='op'>(</span><span class='va'>logistic_f_model</span><span class='op'>)</span>,plot<span class='op'>=</span><span class='cn'>TRUE</span>,legacy.axes<span class='op'>=</span><span class='cn'>TRUE</span>,col<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-26-1.png" width="624" /></p>
+<pre><code>
+Call:
+roc.default(response = predict_data2$.outcome, predictor = fitted(logistic_f_model),     plot = TRUE, legacy.axes = TRUE, col = 2)
+
+Data: fitted(logistic_f_model) in 67 controls (predict_data2$.outcome Adelgen) &lt; 68 cases (predict_data2$.outcome Chinstrap).
+Area under the curve: 1</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>results</span> <span class='op'>%&gt;%</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>==</span><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code>         C  Accuracy     Kappa AccuracySD    KappaSD
+1 6.210526 0.9916667 0.9833333 0.02635231 0.05270463</code></pre>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>logistic_f_model</span><span class='op'>$</span><span class='va'>results</span>
+</code></pre>
+</div>
+</details>
+<pre><code>  parameter Accuracy     Kappa AccuracySD    KappaSD
+1      none 0.977381 0.9547619 0.03656397 0.07312793</code></pre>
+</div>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+<h2 id="part-4-what-the-model-shows">Part 4: What the Model Shows?</h2>
+<blockquote>
+<p>With the SVM model obtained in the previous part, we can learn some themes about each classification. Below is a summary of average penguins’ features in each classification. As we can see, both from the summary, Chinstrap penguins tend to have longer and deeper bill compare to Adelgen penguins.</p>
+</blockquote>
+<blockquote>
+<p>Also, Chinstrap seems to have shorter flippers in general, since the average flipper length for Chinstrap penguins is smaller. Moreover, by looking at the histograms of flipper length, we can also notice that within Adelgen penguins, the length of flippers has a wide range: some have very short flippers while some have very long flippers. Similarly, for body mass, Adelgen penguins tend to have a wider range of body mass while Chinstrap penguins tend to be less heavy in general.</p>
+</blockquote>
+<blockquote>
+<p>By looking at the summary, all Chinstrap penguins live in Dream island while most Adelgen penguins live in Biscoe island with only a small group living in the other two islands.</p>
+</blockquote>
+<blockquote>
+<p>In summary, based on the classification model in the previous part, we learn that Chinstrap penguins tend to have longer bill and deeper bill, shorter flipper, lower body mass, and live in Dream island; Adelgen penguins tend to have shorter and shallow bills, diverse length of the flipper and body mass, and mostly live in Biscoe island.</p>
+</blockquote>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/e1071/man/svm.html'>svm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>~</span><span class='va'>.</span>,<span class='va'>new_penguins</span>, kernel<span class='op'>=</span><span class='st'>'linear'</span>,
+              cost<span class='op'>=</span><span class='va'>svmL_f</span><span class='op'>$</span><span class='va'>bestTune</span><span class='op'>$</span><span class='va'>C</span>, decision.values<span class='op'>=</span><span class='cn'>T</span><span class='op'>)</span>
+<span class='va'>ls</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>my_model</span>,<span class='va'>new_penguins</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>penguins_with_cluster</span> <span class='op'>&lt;-</span> <span class='va'>new_penguins</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>sex<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='op'>)</span> 
+<span class='va'>penguins_with_cluster</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>penguins_with_cluster</span>,<span class='va'>ls</span>, by.x <span class='op'>=</span> <span class='fl'>0</span>, by.y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>predicted<span class='op'>=</span><span class='va'>predict.my_model..new_penguins.</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>predicted<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predicted</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Row.names</span><span class='op'>)</span>
+
+<span class='va'>penguins_with_cluster</span><span class='op'>&lt;-</span><span class='va'>penguins_with_cluster</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>islandDream<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span>
+  <span class='va'>island</span><span class='op'>==</span><span class='st'>'Dream'</span><span class='op'>~</span> <span class='fl'>1</span>, <span class='va'>island</span><span class='op'>!=</span><span class='st'>'Dream'</span><span class='op'>~</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>islandBiscoe<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span>
+  <span class='va'>island</span><span class='op'>==</span><span class='st'>'Biscoe'</span><span class='op'>~</span> <span class='fl'>1</span>, <span class='va'>island</span><span class='op'>!=</span><span class='st'>'Biscoe'</span><span class='op'>~</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>islandTorgersen <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span>
+  <span class='va'>island</span><span class='op'>==</span><span class='st'>'Torgersen'</span><span class='op'>~</span> <span class='fl'>1</span>,<span class='va'>island</span><span class='op'>!=</span><span class='st'>'Torgersen'</span><span class='op'>~</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predicted</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise_all.html'>summarise_all</a></span><span class='op'>(</span><span class='va'>mean</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<pre><code># A tibble: 2 x 12
+  `as.factor(predicted)` species island bill_length_mm bill_depth_mm
+  &lt;fct&gt;                    &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+1 Adelgen                     NA     NA           43.1          16.5
+2 Chinstrap                   NA     NA           48.8          18.4
+# … with 7 more variables: flipper_length_mm &lt;dbl&gt;,
+#   body_mass_g &lt;dbl&gt;, sex &lt;dbl&gt;, predicted &lt;dbl&gt;, islandDream &lt;dbl&gt;,
+#   islandBiscoe &lt;dbl&gt;, islandTorgersen &lt;dbl&gt;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>bill_depth_mm</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Bill depth by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>predicted</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-30-1.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>bill_length_mm</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Bill length by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>predicted</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-30-2.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Flipper length by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>predicted</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-30-3.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Body mass by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>predicted</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-30-4.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Sex by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>predicted</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<img src="project_2_caret_files/figure-html5/unnamed-chunk-31-1.png" width="624" />
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>penguins_with_cluster</span><span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>island</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Island by classifications"</span><span class='op'>)</span><span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>predicted</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="project_2_caret_files/figure-html5/unnamed-chunk-31-2.png" width="624" /></p>
+</div>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</p>
+<h2 id="reference">Reference:</h2>
+<p>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2017). An introduction to statistical learning with applications in R. New York: Springer.<br />
+Campbell, J. (2020). SVM with caret. Retrieved December 13, 2020, from <a href="https://rpubs.com/uky994/593668" class="uri">https://rpubs.com/uky994/593668</a></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

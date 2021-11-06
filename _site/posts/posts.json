@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\nshinny app link\ngithub repo\n\nAbove is the link for my shinny app and the responding github lin. This shinny app show CP plot of a lasso model that predicts the condition of the house. By dragging the bar or selecting variables from windwom on the left, we can input a new observation to draw a CP plot based on our lasso model. After a few try, I found that int_rate and annual_income seem to be important predictors!\n\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-11-04T23:57:14-05:00",
-    "input_file": "lendingshinny.knit.md"
+    "last_modified": "2021-11-04T23:57:15-05:00",
+    "input_file": {}
   },
   {
     "path": "posts/2021-10-19-ttweek4/",
@@ -48,7 +48,7 @@
     "contents": "\n\n\nlibrary(tidyr)\nlibrary(stringr)\nlibrary(tidyverse)     # for graphing and data cleaning\nlibrary(lubridate)     # for date manipulation\nlibrary(ggthemes)      # for even more plotting themes\nlibrary(ggplot2)\nlibrary(tidytext)\nlibrary(rnaturalearth)\nlibrary(rnaturalearthdata)\nlibrary(countrycode)\nlibrary(sf)\ntheme_set(theme_minimal()) # My favorite ggplot() theme :)\n\n\n\n\n\ncaptured_vs_farmed <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-12/capture-fisheries-vs-aquaculture.csv')\nworld <- ne_countries(scale = \"medium\", returnclass = \"sf\")\n\n\n\n\n\nfisher <- captured_vs_farmed %>% \n  filter(Year>2000) %>% \n  drop_na(`Aquaculture production (metric tons)`) %>% \n  mutate(countrycode = countrycode::countryname(Entity, destination = \"iso2c\"),\n         acratio = `Aquaculture production (metric tons)`/(`Aquaculture production (metric tons)`+`Capture fisheries production (metric tons)`))%>% \n  filter(!is.na(countrycode)) %>% \n  group_by(countrycode) %>% \n  summarise(avg_acratio = mean(acratio,na.rm = TRUE))\n\n\n\n\n\nworld %>% \n  left_join(fisher, by = c(\"iso_a2\" = \"countrycode\")) %>% \n  ggplot() + \n  geom_sf(aes(fill = avg_acratio)) + \n  coord_sf(crs = st_crs(3035)) + \n  geom_sf_text(aes(label = abbrev),na.rm = TRUE, size=2)+\n  scale_fill_gradient() + \n  labs(fill = \"Average Ratio\",\n       title = \"Average Ratio of Farmed Fisheries to Total Production of the World (2000-2021)\",\n       x = '',\n       y = '') + \n  theme(plot.title = element_text(family = \"Helvetica\", \n                                  face = \"bold\", \n                                  size = (20),\n                                  hjust = 0.5))\n\n\n\n\n\nAfter knowing more about how aquaculture fisheries can help to ease the pressure of over-fishing. Therefore, since I got data for almost all the countries, I am curious to learn which countries, in general, would have relatively more aquaculture fisheries production. I was also wondering if this number could be related with the location or the size of the country. Therefore, I used geom_sf to help me plot a map that indicates average ratio of farmed fisheries production to total fisheries production of the world from 2000-2021. The grey area suggests that the numbers are not available. As we can see, most of the countries in lighter blue (meaning they produce relatively more aquaculture fishes) seems to be in Europe or in Asia. Belarus and Austria seem to have the most aquaculture fisheries production on relative scale. One failure of the plot is the labels are not very clear. Also, if I have more time, I will be interested to make an animination, to show how this ratio changed over years.\n\n\n\n\n",
     "preview": "posts/2021-10-26-ttweek5/ttweek5_files/figure-html5/unnamed-chunk-4-1.png",
     "last_modified": "2021-10-26T17:50:35-05:00",
-    "input_file": "ttweek5.knit.md"
+    "input_file": {}
   },
   {
     "path": "posts/2021-10-14-billboardshinny/",

@@ -1,0 +1,298 @@
+---
+title: "Machine Leanring Project 1: Explore Price of Airbnb Listings in NYC"
+description: |
+  In this project, I used a Lasso model to explore influencers of price of Airbnb listing in NYC, evaluated the model, and improved it accordingly. 
+author:
+  - name: Rita Liu
+date: 11-23-2020
+preview: airbnb.png
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    code_folding: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+## Setting Up
+
+```{r, message=FALSE}
+library(ggplot2)  # for plots
+library(GGally)   # for pairs plots
+library(ggridges) # for joy plots
+library(dplyr)    # for wrangling
+library(caret)    # for machine learning algorithms
+library(stringr)
+airbnb <- read.csv("https://www.macalester.edu/~ajohns24/data/NYC_airbnb_kaggle.csv")
+nbhd <-read.csv("https://www.macalester.edu/~ajohns24/data/NYC_nbhd_kaggle.csv")
+```
+\
+\
+
+
+## Part 1: Process the data
+> I used NYC Airbnb data on Kaggle, joined two datasets, selected 5000 samples, and mutated varaibles for further use. 
+
+```{r, message=FALSE, warning=FALSE}
+airbnb <- airbnb %>% rename(neighbourhood=neighbourhood_cleansed)
+airbnb <-airbnb %>% left_join(nbhd)
+#Process the data for model input
+set.seed(830)
+airbnb_sub<-airbnb%>%
+  filter(price<=1000) %>%
+  select(-id,-square_feet) %>%
+  sample_n(5000) %>%
+  mutate(
+    noamenities = str_count(amenities, ',') +1, # count the number of amenities in each house
+    host_response_rate = na.pass(as.numeric(str_remove(host_response_rate,"%"))), # convert host_response_rate from string to number
+    host_response_time=as.factor(host_response_time), # prepare all categorical variables for the model to use
+    host_is_superhost=as.factor(host_is_superhost),
+    neighbourhood=as.factor(neighbourhood),
+    property_type=as.factor(property_type),
+    room_type=as.factor(room_type),
+    bed_type=as.factor(bed_type),
+    instant_bookable = as.factor(instant_bookable),
+    cancellation_policy =as.factor(cancellation_policy),
+    calendar_updated=as.factor(calendar_updated),
+    room_type=as.factor(room_type),
+    is_location_exact=as.factor(is_location_exact),
+    host_has_profile_pic=as.factor(host_has_profile_pic),
+    is_business_travel_ready=as.factor(is_business_travel_ready),
+    require_guest_profile_picture=as.factor(require_guest_profile_picture),
+    neighbourhood_group=as.factor(neighbourhood_group)
+    ) %>%
+  select(-amenities)
+```
+
+## Part 2: Analyze
+### preliminary insights of price
+```{r, message=FALSE}
+ggplot(airbnb_sub,aes(x=price)) + 
+  geom_histogram()
+```
+\
+\
+\
+\
+
+ > Above shows the distribution of listing price of Airbnb in our sample. The price of the Airbnb skews heavily to the right and a typical price for a Airbnb housing in the New York is around 125 dollars per night. The price for housing spreads out from 0 to 1000 dollars and is relatively disperse. There are probably a few outliers at the high end of the price. 
+
+\
+\
+
+### Selecting Variables Using Simple Lasso Model
+
+ > To build and evaluate a predictive model of listing price, I first decide to use the LASSO model to choose the predictors I wish to include in the model since including all the variables available would generate a too complicated model for our purpose and the model tends to overfit. Lasso is chosen over the variable selection method not only because it is more computationally efficient, but also because it does not perform multiple testings when selecting the model so our results would not be overestimated. 
+
+\
+\
+
+```{r, message=FALSE}
+set.seed(830)
+# Perform LASSO
+lasso_model <- train(
+    price ~ .,
+    data = airbnb_sub,
+    method = "glmnet",
+    tuneGrid = data.frame(alpha = 1, lambda = seq(0, 10, length = 100)),
+    trControl = trainControl(method = "cv", number = 10, selectionFunction = "oneSE"),
+    metric = "MAE",
+    na.action = na.omit
+)
+#coef(lasso_model$finalModel,lasso_model$bestTune$lambda)
+```
+
+> I have chosen the method "oneSE" over "best" because in this case, I want to have a relatively simple model. Here, lambda equals to 5.252525. The plot showing relationship between tuning parameter and MAE shows below. As we can see, the MAE for using a tuning parameter of 5.252525	is close to the lowest MAE. Therefore, this lambda value is reasonable. The variables remained after shrinkage are longitude, room_type, accommodates, bathrooms, bedrooms, availability_30, review_scores_rating, is_business_travel_ready, reviews_per_month, noamenities, and guests_included. Note that a few categorical variables like neighborhood and neighbourhood_group are removed because not all the levels remained after the shrinkage. 
+
+```{r, message=FALSE}
+lasso_model$bestTune
+plot(lasso_model)
+```
+
+
+> I then fit a linear regression using the variables selected by the LASSO model. On average, if we apply this model to a new set of data, a typical error would be 45.40 dollars. Here, R^2 is relatively low: only 53.97% of the listing price is explained by the model. I further study the residual plot to exam if the model is wrong.
+
+```{r, warning=FALSE, message=FALSE}
+my_model <- train(
+    price ~ longitude+room_type + accommodates + bathrooms + bedrooms + availability_30+review_scores_rating+is_business_travel_ready+reviews_per_month+noamenities+guests_included,
+    data = airbnb_sub,
+    method = 'lm',
+    trControl = trainControl(method = 'cv', number = 10),
+    metric = "MAE",
+    na.action = na.omit
+)
+```
+```{r}
+summary(my_model)
+```
+```{r}
+my_model$results
+```
+ 
+
+### Is the model wrong?
+```{r, message=FALSE}
+# Combine residuals & predictions into data frame
+result_df <- data.frame(resid = resid(my_model), fitted = fitted(my_model))
+
+# Residual plot
+ggplot(result_df, aes(x = fitted, y = resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+```
+\
+\
+ 
+
+ > Above shows the residual plot of a simple regression model with selected predictors. The residual plot is not ideal because it is not balanced above and below zero. We can also observe a negative trend of the residuals. The plot is also heteroskedastic: the smaller the fitted value, the smaller the residuals are. One possible reason is that our outcome price skews heavily to the right. Therefore, I even the distribution of outcome by using log(price). 
+
+### Linear regression using log(price)
+#### preliminary insights of log(price)
+>Below is the graph showing distribution of log(price). As we can see, it is about symmetric and centered around 5. Using log(price) should help to generate a better model. 
+
+```{r, message=FALSE}
+ggplot(airbnb_sub,aes(x=log(price))) + 
+  geom_histogram()
+```
+\
+\
+\
+
+#### Actual Model: log(price) as the outcome
+```{r, message=FALSE}
+log_model_data<-airbnb_sub %>%
+  select(price,longitude,room_type,accommodates,bathrooms,bedrooms,availability_30,review_scores_rating,is_business_travel_ready,reviews_per_month,noamenities,guests_included) %>%
+  mutate(logprice=log(price))%>%
+  select(-price) %>%
+  filter(logprice>-Inf)
+```
+```{r warning=FALSE}
+log_model <- train(
+    logprice ~ longitude+room_type + accommodates + bathrooms + bedrooms + availability_30+review_scores_rating+is_business_travel_ready+reviews_per_month+noamenities+guests_included,
+    data = log_model_data,
+    method = 'lm',
+    trControl = trainControl(method = 'cv', number = 10),
+    metric = "MAE",
+    na.action = na.omit
+)
+```
+
+```{r}
+log_model$results
+```
+```{r,message=FALSE}
+# Combine residuals & predictions into data frame
+result_df3 <- data.frame(resid = resid(log_model), fitted = fitted(log_model))
+
+# Residual plot
+ggplot(result_df3, aes(x = fitted, y = resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+```
+
+\
+\
+\
+
+> With the log model, R^2 improved: now 63.11% of y variable is explained by the model. The residual plot also improved: the residuals are now balanced around zero and seem to be randomly distributed. The residual plot is not heteroskedastic anymore. Therefore, log model probably is a better model in predicting the price.
+
+\
+\
+\
+	
+ > Through the model building process, I choose the least square regression over the KNN and GAM model because the least square model is easier to interpret. However, the GAM model is indeed better if the relationship between the outcome and predictors are nonlinear. Therefore, I build a gam model using the same predictors selected by the LASSO model. The detailed codes and results can be found in the appendix. The gam model has an MAE of 43.71 dollars and a r^2 of 56.50%, not significantly outperform the least square regression. As a result, I choose the least square model using log(price) as the outcome. 
+
+\
+\
+\
+\
+\
+\
+
+
+
+
+## Part 3: Summarize
+```{r message=FALSE}
+
+summary(log_model)
+round(exp(log_model$finalModel$coefficients),3)
+```
+\
+\
+
+ > Airbnb price is positively associated with the following factors: the number of accommodates, bathrooms, bedrooms, amenities, and guests included, as well as its availability in 30 days, whether it is ready for business travel, and the rating of review scores. Among them, the number of accommodates and bathrooms have the strongest and significant impact. With one more accommodate and bathroom, the price on average would be 1.077 and 1.114 times higher respectively, holding other variables constant. 
+
+\
+
+ > On the other hand, longitude, private room, shared room, and reviews per month are negatively associated with price. Among them, the strongest and the most significant predictors to listing price seems to be longitude and room types. If the longitude increases by 1 degree, the price of Airbnb will, on average, be 0.016 times less, holding other variables constant. For room types, compared to entire home or apartment, if the room types are private rooms or shared rooms, the price, on average, would be 0.557 and 0.362 times lower respectively, holding other variables constant. Below is the graph picturing the relationship between room types and price. According to the box plot, it seems that private rooms and shared rooms typically are cheaper than the entire home or apartment. 
+
+```{r message=FALSE}
+ggplot(airbnb_sub,aes(y=price,x=room_type)) +
+  geom_boxplot()
+```
+
+
+
+\
+\
+\
+\
+\
+\
+
+
+
+
+## Apendix: GAM Model
+```{r, warning=FALSE}
+    ggplot(airbnb_sub,aes(y=price,x=bathrooms))+
+      geom_point()
+```
+\
+\
+
+ > I do notice that not all the variables have linear relationship with the outcome. For example, above is the plot showing the relationship between the number of bathrooms and the price. Clearly, this is not a linear relationship. In this case, GAM might be a better model when using to predict the outcome. Therefore, I fitted a GAM model using the same set of predictors. 
+
+```{r}
+#process data
+gam_model_data <- airbnb_sub %>% 
+      select(price,longitude,room_type,accommodates,bathrooms,bedrooms,availability_30,number_of_reviews,review_scores_rating,is_business_travel_ready,reviews_per_month,noamenities,guests_included) 
+     
+gam_model_data <- data.frame(model.matrix(~ . - 1, gam_model_data))
+    
+gam_model <- train(
+    price ~ longitude+room_typeEntire.home.apt+room_typePrivate.room+room_typeShared.room+accommodates+bathrooms+bedrooms+availability_30+number_of_reviews+review_scores_rating+is_business_travel_readyt+reviews_per_month+noamenities+guests_included,
+    data = gam_model_data,
+    method = 'gamLoess',
+    tuneGrid = data.frame(span = seq(0.1, 1, length = 10), degree = 1),
+    trControl = trainControl(method = "cv", number = 10, selectionFunction = "best"),
+    metric = "MAE",
+    na.action = na.omit
+)
+
+gam_model$results %>% filter(span==gam_model$bestTune$span)
+```
+
+> With the GAM model, the R^2 is 0.565, meaning that 56.5% listing price are explained by the model; The MAE is 43.71 dollars: when we apply this model to a new set of data, we would expect the prediction to be off by 43.84 dollars. These results are not better than the least sqaure model. 
+
+
+\
+\
+
+```{r}
+# Combine residuals & predictions into data frame
+result_df2 <- data.frame(resid = resid(gam_model), fitted = fitted(gam_model))
+
+# Residual plot
+ggplot(result_df2, aes(x = fitted, y = resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+```
+\
+\
+
+ > Above shows the residual plot of GAM model. The residual plot shows that this model might be wrong too since it is not balanced aroudn zero and the residuals are not random. 

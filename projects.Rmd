@@ -1,0 +1,53 @@
+---
+title: "projects"
+listing: projects
+theme: "rita_theme.css"
+---
+
+#### Here is a summary of my projects. To view details, click on the link. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(kableExtra)
+```
+
+```{r}
+date<-c("2021-03","2020-12","2020-12","2020-11")
+```
+
+```{r}
+project<-c("Survival Analysis: what affects business formation?",
+           "Agent-based Modeling: how pandemic changed consumers' behaviors",
+           "Machine Leanring Project 1: Explore Price of Airbnb Listings in NYC",
+           "Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species")
+```
+
+```{r}
+description<-c("I used Kaplan-Meier Curves, lognormal model, and COX-PH models to study what can influence the formation duration of start-ups in each states.",
+               "I built an agent-based model to study how pandemic changed consumers' behaviors. The model simulated the features and interations of consumers, products, and covid spread.",
+               "I used a Lasso model to explore influencers of price of Airbnb listing in NYC, evaluated the model, and improved it accordingly.",
+               "I will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R")
+```
+
+```{r}
+link = c("https://docs.google.com/presentation/d/1oZOoVnUagBSyolvcnDHjqcGJxLJyMe-YKHS40oCwiTM/edit?usp=sharing",
+          "https://docs.google.com/presentation/d/1UOlbplWBFk2vm-NBgYyCC2g3W7828HULkuqTy66V3Eo/edit?usp=sharing",
+         "https://ritaliu.netlify.app/blog.html",
+         "https://ritaliu.netlify.app/blog.html")
+```
+
+```{r}
+data.frame(cbind(date,project,description)) %>% 
+  kbl() %>% 
+  kable_styling(full_width = T) %>% 
+  column_spec(1,width = "10em") %>% 
+  column_spec(2:3,width = "30em") %>% 
+  column_spec(2, link=link)
+```
+
+
+
+
