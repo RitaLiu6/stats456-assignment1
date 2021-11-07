@@ -35,8 +35,8 @@ description<-c("I used Kaplan-Meier Curves, lognormal model, and COX-PH models t
 ```{r}
 link = c("https://docs.google.com/presentation/d/1oZOoVnUagBSyolvcnDHjqcGJxLJyMe-YKHS40oCwiTM/edit?usp=sharing",
           "https://docs.google.com/presentation/d/1UOlbplWBFk2vm-NBgYyCC2g3W7828HULkuqTy66V3Eo/edit?usp=sharing",
-         "https://ritaliu.netlify.app/blog.html",
-         "https://ritaliu.netlify.app/blog.html")
+         "https://ritaliu.netlify.app/projects/ml_p1/",
+         "https://ritaliu.netlify.app/projects/ml_p2/")
 ```
 
 ```{r}
