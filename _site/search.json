@@ -5,22 +5,22 @@
       "title": "Tidy Tuesday Posts",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-11-06T16:59:32-05:00"
+      "last_modified": "2021-11-10T00:05:12-06:00"
     },
     {
       "path": "index.html",
       "title": "Rita Liu",
       "description": "Welcome to the website. I hope you enjoy it!\n",
       "author": [],
-      "contents": "\n\nAbout me:\nMy name is Rita Liu. I’m from Beijing, China. My favorite activity during free time is to eat snacks while watching sitcoms.\nEducation:\nI go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics. Here are some classes I’vev taken: Mathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure.\n\n\n\n",
-      "last_modified": "2021-11-06T16:59:33-05:00"
+      "contents": "\n\nAbout me:\nMy name is Rita Liu. I’m from Beijing, China. I’m interested in using data to solve real-life problems.\nEducation:\nI go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics.\nRelevant Coursework:\nMathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure.\n\n\n\n",
+      "last_modified": "2021-11-10T00:05:13-06:00"
     },
     {
       "path": "projects.html",
       "title": "projects",
       "author": [],
       "contents": "\nHere is a summary of my projects. To view details, click on the link.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndate\n\n\nproject\n\n\ndescription\n\n\n2021-03\n\n\n Survival Analysis: what affects business formation? \n\n\nI used Kaplan-Meier Curves, lognormal model, and COX-PH models to study what can influence the formation duration of start-ups in each states.\n\n\n2020-12\n\n\n Agent-based Modeling: how pandemic changed consumers’ behaviors \n\n\nI built an agent-based model to study how pandemic changed consumers’ behaviors. The model simulated the features and interations of consumers, products, and covid spread.\n\n\n2020-12\n\n\n Machine Leanring Project 1: Explore Price of Airbnb Listings in NYC \n\n\nI used a Lasso model to explore influencers of price of Airbnb listing in NYC, evaluated the model, and improved it accordingly.\n\n\n2020-11\n\n\n Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species \n\n\nI will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R\n\n\n\n\n\n",
-      "last_modified": "2021-11-09T23:59:38-06:00"
+      "last_modified": "2021-11-10T00:05:14-06:00"
     }
   ],
   "collections": ["posts/posts.json", "projects/projects.json"]

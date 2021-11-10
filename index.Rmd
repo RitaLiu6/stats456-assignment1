@@ -20,5 +20,7 @@ My name is Rita Liu. I'm from Beijing, China. I'm interested in using data to so
 
 ## Education: 
 I go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics. 
-#### Relevant Coursework
+
+#### Relevant Coursework:
+
 Mathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure. 
