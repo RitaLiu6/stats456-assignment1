@@ -10,6 +10,8 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
+    toc_collapsed: true
+    toc_float: true
     code_folding: true
 ---
 
@@ -53,19 +55,19 @@ $y_{i}*f(x_1,x_2,...,x_n) > 0$.
 \
 
 However, there are many hyperplanes that can separate the observations, as we can see from the figure below.
-![figure 1](/Users/ritaliu/Desktop/Fall_2020/STATS253/project 2/F1.png)
+![figure 1](F1.png)
 Since we want to choose the plane that best separates two classes, we want the plane to have the farthest minimum distance or margin from the observations. In the language of math, that is, $y_{i}*f(x_1,x_2,...,x_n) > = M$, where M is the farthest minimum distance from the hyperplane to the observations. 
 \
 As we can see from the figure below, three training observations are on the dashed line, meaning that the distance between these three observations and the separating hyperplane is the margin. Those points are support vectors, because if they move, the hyperplane would change. 
-![](/Users/ritaliu/Desktop/Fall_2020/STATS253/project 2/F2.png)
+![](F2.png)
 \
 Not all observations can be perfectly separated into two classes by a plane and we could allow misclassifying of some a few observations by adding slack variables $ε$ and the hyperplane satisfies $y_{i}*f(x_1,x_2,...,x_n) > = M*(1-ε_i)$. When $ε_i=0$, the observation is on the correct side of the margin; when $ε_i>0$, the observation is on the wrong side of the margin; and when $ε_i>1$, it's on the wrong side of the plane. For example, as the graph below demonstrates, observation 12 and 11 would have a slack variable bigger than 1 because they are on the wrong side of the hyperplane. 
 
-![](/Users/ritaliu/Desktop/Fall_2020/STATS253/project 2/F3.png)
+![](F3.png)
 
 \
 Hyperplane function $f(x_i)$ can have different forms or take in different kernels which allow us to have non-linear boundaries. For example, in the graph below, the figure on the left uses a polynomial kernel and the figure on the right uses a radial kernel.  
-![](/Users/ritaliu/Desktop/Fall_2020/STATS253/project 2/F4.png)
+![](F4.png)
 \
 \
 \
