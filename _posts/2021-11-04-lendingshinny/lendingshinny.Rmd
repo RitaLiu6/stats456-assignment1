@@ -16,9 +16,9 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-[shinny app link](This shinny app will show CP plot of a lasso model that predicts the condition of the house)  
+[shinny app link](https://ritaliu6.shinyapps.io/05_assignment_shiny/)  
 
 [github repo](https://github.com/RitaLiu6/05_assignment_shiny)
 
-> Above is the link for my shinny app and the responding github lin. This shinny app show CP plot of a lasso model that predicts the condition of the house. By dragging the bar or selecting variables from windwom on the left, we can input a new observation to draw a CP plot based on our lasso model. After a few try, I found that int_rate and annual_income seem to be important predictors! 
+> Above is the link for my shinny app and the responding github link. This shinny app show CP plot of a lasso model that predicts the condition of the house. By dragging the bar or selecting variables from windwom on the left, we can input a new observation to draw a CP plot based on our lasso model. After a few try, I found that int_rate and annual_income seem to be important predictors! 
 

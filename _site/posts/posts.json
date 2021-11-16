@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\nshinny app link\ngithub repo\n\nAbove is the link for my shinny app and the responding github lin. This shinny app show CP plot of a lasso model that predicts the condition of the house. By dragging the bar or selecting variables from windwom on the left, we can input a new observation to draw a CP plot based on our lasso model. After a few try, I found that int_rate and annual_income seem to be important predictors!\n\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-11-04T23:57:15-05:00",
-    "input_file": {}
+    "last_modified": "2021-11-16T09:05:28-06:00",
+    "input_file": "lendingshinny.knit.md"
   },
   {
     "path": "posts/2021-10-19-ttweek4/",
