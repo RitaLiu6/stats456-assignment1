@@ -9,8 +9,12 @@ navbar:
   right:
     - text: "About"
       href: index.html
-    - text: "Blogs"
-      href: blog.html
+    - text: "Posts"
+      menu:
+        - text: "Blogs"
+          href: blog.html
+        - text: "Shinny Apps"
+          href: shinny.html
     - text: "Projects"
       href: projects.html
     - icon: fa fa-github
