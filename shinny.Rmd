@@ -24,7 +24,7 @@ Apps<-c("A shinny app to billboard ranking",
 
 ```{r}
 Description<-c("For this shinny app, we can select performer and then their individual songs to see how that song ranked in billboard in 2021.",
-               "This shinny app will allow users to select features for a house and show the Ceteris Perabus Profile plot of a lasso model that predicts the condition of the house.")
+               "This shinny app will allow users to select relevant features of a loaner and show the Ceteris Perabus Profile plot of a lasso model that predicts the condition of the loan.")
 ```
 
 ```{r}
