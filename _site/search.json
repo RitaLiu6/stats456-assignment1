@@ -5,7 +5,7 @@
       "title": "Tidy Tuesday Posts",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-12-21T09:35:53-06:00"
+      "last_modified": "2021-12-21T09:51:16-06:00"
     },
     {
       "path": "index.html",
@@ -13,21 +13,21 @@
       "description": "Welcome to the website. I hope you enjoy it!\n",
       "author": [],
       "contents": "\n\nAbout me:\nMy name is Rita Liu. I’m from Beijing, China. I’m interested in using data to solve real-life problems.\nEducation:\nI go to Macalester College in Saint Paul, Minnesota. I double major in Applied Math and Economics.\nRelevant Coursework:\nMathematical Modeling (Python), Computational Linear Algebra (R), Differential Equation(Matlab), Machine Learning, Probability, Survival Analysis, Finance, Econometrics, Data Science (R), Data Structure.\n\n\n\n",
-      "last_modified": "2021-12-21T09:35:54-06:00"
+      "last_modified": "2021-12-21T09:51:18-06:00"
     },
     {
       "path": "projects.html",
       "title": "projects",
       "author": [],
-      "contents": "\nHere is a summary of my projects. To view details, click on the link.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndate\n\n\nproject\n\n\ndescription\n\n\n2021-03\n\n\n Survival Analysis: what affects business formation? \n\n\nI used Kaplan-Meier Curves, lognormal model, and COX-PH models to study what can influence the formation duration of start-ups in each states.\n\n\n2020-12\n\n\n Agent-based Modeling: how pandemic changed consumers’ behaviors \n\n\nI built an agent-based model to study how pandemic changed consumers’ behaviors. The model simulated the features and interations of consumers, products, and covid spread.\n\n\n2020-12\n\n\n Machine Leanring Project 1: Explore Price of Airbnb Listings in NYC \n\n\nI used a Lasso model to explore influencers of price of Airbnb listing in NYC, evaluated the model, and improved it accordingly.\n\n\n2020-11\n\n\n Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species \n\n\nI will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R\n\n\n\n\n\n",
-      "last_modified": "2021-12-21T09:35:55-06:00"
+      "contents": "\nHere is a summary of my projects. To view details, click on the link.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndate\n\n\nproject\n\n\ndescription\n\n\n2021-12\n\n\n Data Science Project: Predict Stock Return Using Machine Learnings Models \n\n\nI used Lasso model, random forest model, and staking model to predict the stock return and to evaluate each model.\n\n\n2021-03\n\n\n Survival Analysis: what affects business formation? \n\n\nI used Kaplan-Meier Curves, lognormal model, and COX-PH models to study what can influence the formation duration of start-ups in each states.\n\n\n2020-12\n\n\n Agent-based Modeling: how pandemic changed consumers’ behaviors \n\n\nI built an agent-based model to study how pandemic changed consumers’ behaviors. The model simulated the features and interations of consumers, products, and covid spread.\n\n\n2020-12\n\n\n Machine Leanring Project 1: Explore Price of Airbnb Listings in NYC \n\n\nI used a Lasso model to explore influencers of price of Airbnb listing in NYC, evaluated the model, and improved it accordingly.\n\n\n2020-11\n\n\n Machine Leanring Project 2: SVM Summary and Its Application on Penguin Species \n\n\nI will give a brief overview of a new classification algorithm support vector machines (SVM) and use it to predict Penguin Species using palmerpenguins data in R\n\n\n\n\n\n",
+      "last_modified": "2021-12-21T09:51:19-06:00"
     },
     {
       "path": "shinny.html",
       "title": "Shinny Apps",
       "author": [],
       "contents": "\nHere is a summary the shinny apps I created. To view details, click on the link.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDate\n\n\nApps\n\n\nDescription\n\n\nGitHub_Repo\n\n\n2021-10\n\n\n A shinny app to billboard ranking \n\n\nFor this shinny app, we can select performer and then their individual songs to see how that song ranked in billboard in 2021.\n\n\n GitHub Repo \n\n\n20201-11\n\n\n A Shinny App for Housing Lending Prediction \n\n\nThis shinny app will allow users to select relevant features of a loaner and show the Ceteris Perabus Profile plot of a lasso model that predicts the condition of the loan.\n\n\n GitHub Repo \n\n\n\n\n\n",
-      "last_modified": "2021-12-21T09:35:56-06:00"
+      "last_modified": "2021-12-21T09:51:19-06:00"
     }
   ],
   "collections": ["posts/posts.json", "projects/projects.json"]

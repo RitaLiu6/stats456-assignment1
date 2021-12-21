@@ -49,6 +49,7 @@ data.frame(cbind(date,project,description)) %>%
   column_spec(1,width = "10em") %>% 
   column_spec(2:3,width = "30em") %>% 
   column_spec(2, link=link)
+
 ```
 
 
